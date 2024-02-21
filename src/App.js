@@ -1,8 +1,9 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import ProductListPage from './ProductListPage';
 import ProductComparisonPage from './ProductComparisonPage';
+import ProductComparisonDetail from './ProductComparisonDetail'; // Import the component
+import DiningListPage from './DiningListPage'; // Import DiningListPage
 import './App.css';
 
 function App() {
@@ -24,7 +25,15 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/explore-shopping" element={<ProductListPage />} />
           <Route path="/compare/:id" element={<ProductComparisonPage />} />
+          <Route path="/dining" element={<DiningListPage />} /> {/* Use DiningListPage here */}
+          <Route path="/dining/compare/:id" element={<ProductComparisonDetail />} />
         </Routes>
+
+        <div className="container mx-auto p-8">
+          <div className="grid grid-cols-2 gap-4">
+           
+          </div>
+        </div>
       </div>
     </Router>
   );
@@ -33,11 +42,26 @@ function App() {
 const Home = () => (
   <div className="container mx-auto p-8">
     <div className="grid grid-cols-2 gap-4">
-      <OptionCard title="Shopping" imageUrl="/Images/shopping.jpeg" link="/explore-shopping" />
-      <OptionCard title="Dining" imageUrl="/Images/dining2.png" />
+      <div>
+        <img src="/Images/shopping.jpeg" alt="Shopping" className="w-full h-100 object-cover mb-4 rounded-md" />
+        <div className="flex justify-center">
+          <Link to="/explore-shopping" className="block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
+            Explore Shopping
+          </Link>
+        </div>
+      </div>
+      <div>
+        <img src="/Images/dining2.png" alt="Dining" className="w-full h-100 object-cover mb-4 rounded-md" />
+        <div className="flex justify-center">
+          <Link to="/dining" className="block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
+            Explore Dining
+          </Link>
+        </div>
+      </div>
     </div>
   </div>
 );
+
 
 const AboutUs = () => (
   <div className="bg-white p-8 mt-8">
@@ -45,23 +69,9 @@ const AboutUs = () => (
       Welcome to our App!
     </h2>
     <p>
-We are a team of four enthusiastic individuals currently in our final year of Computer Engineering at Sinhgad Academy of Engineering. Under the guidance of Prof. Shelke, the Head of the Computer Department, we have collaborated to create a groundbreaking price comparison web app. Our project aims to simplify the user experience by providing seamless price comparison across popular platforms. In the shopping section, we aggregate prices from giants like Amazon and Flipkart. In the dining section, we compare prices from Zomato and Swiggy, making it a one-stop solution for users. Throughout this journey, our focus has been on delivering a user-friendly and efficient platform. We are committed to simplifying the shopping and dining experience, helping users make informed decisions.
-
-Thank you for being a part of our exciting venture!
-
+      We are a team of four enthusiastic individuals currently in our final year of Computer Engineering at Sinhgad Academy of Engineering. Under the guidance of Prof. Shelke, the Head of the Computer Department, we have collaborated to create a groundbreaking price comparison web app. Our project aims to simplify the user experience by providing seamless price comparison across popular platforms. In the shopping section, we aggregate prices from giants like Amazon and Flipkart. In the dining section, we compare prices from Zomato and Swiggy, making it a one-stop solution for users. Throughout this journey, our focus has been on delivering a user-friendly and efficient platform. We are committed to simplifying the shopping and dining experience, helping users make informed decisions.
+      Thank you for being a part of our exciting venture!
     </p>
-  </div>
-);
-
-const OptionCard = ({ title, imageUrl, link }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
-    <h2 className="text-xl font-semibold mb-4">{title}</h2>
-    <img src={imageUrl} alt={title} className="w-full h-100 object-cover mb-4 rounded-md" />
-    <div className="flex justify-center">
-      <Link to={link} className="block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
-        Explore {title}
-      </Link>
-    </div>
   </div>
 );
 
