@@ -1,6 +1,6 @@
-// src/ProductListPage.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Autosuggest from 'react-autosuggest';
 
 const ProductListPage = () => {
   // Dummy product data (replace this with your actual data)
@@ -16,8 +16,48 @@ const ProductListPage = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('priceHighToLow');
+  const [suggestions, setSuggestions] = useState([]);
 
-  // Filtered and sorted products (using dummy data for comparison)
+  const onChange = (event, { newValue }) => {
+    setSearchTerm(newValue);
+  };
+
+  const getSuggestions = value => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return inputLength === 0
+      ? []
+      : products.filter(
+          product => product.name.toLowerCase().slice(0, inputLength) === inputValue
+        );
+  };
+
+  const onSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(getSuggestions(value));
+  };
+
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+  const getSuggestionValue = suggestion => suggestion.name;
+
+  const renderSuggestion = suggestion => (
+    <div>
+      <Link to={`/compare/${suggestion.id}`}>
+        {suggestion.name} - ${suggestion.price}
+      </Link>
+    </div>
+  );
+
+  const inputProps = {
+    placeholder: 'Search products...',
+    value: searchTerm,
+    onChange: onChange,
+    className: 'p-2 border border-gray-300 rounded-md w-full'
+  };
+
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -36,12 +76,13 @@ const ProductListPage = () => {
 
       {/* Search bar */}
       <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 border border-gray-300 rounded-md w-full"
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
         />
       </div>
 
