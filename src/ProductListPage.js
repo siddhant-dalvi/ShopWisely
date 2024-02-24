@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import Autosuggest from 'react-autosuggest';
 
 const ProductListPage = () => {
-  // Dummy product data (replace this with your actual data)
-  const products = [
-    { id: 1, name: 'Product 1', price: 50, image: 'shoping.jpg' },
-    { id: 2, name: 'Product 2', price: 30, image: 'product2.jpg' },
-    { id: 3, name: 'Product 3', price: 3, image: 'product2.jpg' },
-    { id: 4, name: 'Product 4', price: 350, image: 'product2.jpg' },
-    { id: 5, name: 'Product 5', price: 306, image: 'product2.jpg' },
-    { id: 6, name: 'Product 6', price: 300, image: 'product2.jpg' },
-    // ... Add more products
+  // Dummy dining product data (replace this with your actual data)
+  const Products = [
+    { id: 1, name: 'a', price: 10, image: '/Images/pizza.jpg' },
+    { id: 2, name: 'b', price: 8, image: '/Images/burger.jpg' },
+    { id: 3, name: 'c', price: 2, image: '/Images/burger.jpg' },
+    { id: 4, name: 'd', price: 6, image: '/Images/burger.jpg' },
+    { id: 5, name: 'e', price: 4, image: '/Images/burger.jpg' },
+    { id: 6, name: 'f', price: 5, image: '/Images/burger.jpg' },
+    { id: 7, name: 'g', price: 5, image: '/Images/burger.jpg' },
+    // Add more dining products
   ];
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,7 +29,7 @@ const ProductListPage = () => {
 
     return inputLength === 0
       ? []
-      : products.filter(
+      : Products.filter(
           product => product.name.toLowerCase().slice(0, inputLength) === inputValue
         );
   };
@@ -45,20 +46,20 @@ const ProductListPage = () => {
 
   const renderSuggestion = suggestion => (
     <div>
-      <Link to={`/compare/${suggestion.id}`}>
-        {suggestion.name} - ${suggestion.price}
+      <Link to={`/shopping/compare/${suggestion.id}`}>
+        {suggestion.name} - ₹{suggestion.price}
       </Link>
     </div>
   );
 
   const inputProps = {
-    placeholder: 'Search products...',
+    placeholder: 'Search for dining products...',
     value: searchTerm,
     onChange: onChange,
     className: 'p-2 border border-gray-300 rounded-md w-full'
   };
 
-  const filteredProducts = products.filter(product =>
+  const filteredProducts = Products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -72,7 +73,7 @@ const ProductListPage = () => {
 
   return (
     <div className="container mx-auto p-8">
-      <h2 className="text-2xl font-semibold mb-4">Shopping Products</h2>
+      <h2 className="text-2xl font-semibold mb-4">Products</h2>
 
       {/* Search bar */}
       <div className="mb-4">
@@ -99,28 +100,26 @@ const ProductListPage = () => {
         </select>
       </div>
 
-      {/* Product list */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {sortedProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <div
+            key={product.id}
+            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+          >
+            <Link to={`/shopping/compare/${product.id}`} className="block">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-48 object-cover mb-4 rounded-md hover:opacity-75 transition duration-300 ease-in-out"
+              />
+              <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
+              <p className="text-gray-700">₹{product.price}</p>
+            </Link>
+          </div>
         ))}
       </div>
     </div>
   );
 };
-
-const ProductCard = ({ product }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
-    <Link to={`/compare/${product.id}`} className="block">
-      <img
-        src={product.image}
-        alt={product.name}
-        className="w-full h-48 object-cover mb-4 rounded-md hover:opacity-75 transition duration-300 ease-in-out"
-      />
-      <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
-      <p className="text-gray-700">${product.price}</p>
-    </Link>
-  </div>
-);
 
 export default ProductListPage;
