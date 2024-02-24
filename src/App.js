@@ -21,13 +21,17 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/explore-shopping" element={<ProductListPage />} />
-          <Route path="/compare/:id" element={<ProductComparisonPage />} />
-          <Route path="/dining" element={<DiningListPage />} /> {/* Use DiningListPage here */}
-          <Route path="/dining/compare/:id" element={<ProductComparisonDetail />} />
-        </Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/about" element={<AboutUs />} />
+  <Route path="/explore-shopping" element={<ProductListPage />} />
+  <Route path="/shopping/compare/:id" element={<ProductComparisonPage />} />
+
+  <Route path="/compare/:id" element={<ProductComparisonPage />} />
+  <Route path="/explore-dining" element={<DiningListPage />} />
+  <Route path="/dining/compare/:id" element={<ProductComparisonDetail />} />
+</Routes>
+
+        
 
         <div className="container mx-auto p-8">
           <div className="grid grid-cols-2 gap-4">
@@ -43,7 +47,7 @@ const Home = () => (
   <div className="container mx-auto p-8">
     <div className="grid grid-cols-2 gap-4">
       <div>
-        <img src="/Images/shopping.jpeg" alt="Shopping" className="w-full h-100 object-cover mb-4 rounded-md" />
+        <img src="/Images/shop.jpg" alt="Shopping" className="w-full h-80 object-cover mb-4 rounded-md" />
         <div className="flex justify-center">
           <Link to="/explore-shopping" className="block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
             Explore Shopping
@@ -51,9 +55,9 @@ const Home = () => (
         </div>
       </div>
       <div>
-        <img src="/Images/dining2.png" alt="Dining" className="w-full h-100 object-cover mb-4 rounded-md" />
+        <img src="/Images/dining2.png" alt="Dining" className="w-full h-80 object-cover mb-4 rounded-md" />
         <div className="flex justify-center">
-          <Link to="/dining" className="block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
+          <Link to="/explore-dining" className="block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out">
             Explore Dining
           </Link>
         </div>
