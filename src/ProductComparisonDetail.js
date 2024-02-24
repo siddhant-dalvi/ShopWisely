@@ -61,7 +61,7 @@ const ProductComparisonDetail = () => {
         <tbody>
           <tr>
             <td className="border border-gray-400 px-4 py-2">Zomato</td>
-            <td className="border border-gray-400 px-4 py-2"><img src={product.zomato.image} alt={product.name} className="w-24 h-24 object-cover" /></td>
+            <td className="border border-gray-400 px-4 py-2"><img src={product.zomato.image} alt={product.name} className="w-24 h-24 object-cover sm:w-32 sm:h-32" /></td>
             <td className="border border-gray-400 px-4 py-2">₹{product.zomato.price}</td>
             <td className="border border-gray-400 px-4 py-2">{product.zomato.rating}</td>
             <td className="border border-gray-400 px-4 py-2">{product.zomato.review}</td>
@@ -69,7 +69,7 @@ const ProductComparisonDetail = () => {
           </tr>
           <tr>
             <td className="border border-gray-400 px-4 py-2">Swiggy</td>
-            <td className="border border-gray-400 px-4 py-2"><img src={product.swiggy.image} alt={product.name} className="w-24 h-24 object-cover" /></td>
+            <td className="border border-gray-400 px-4 py-2"><img src={product.swiggy.image} alt={product.name} className="w-24 h-24 object-cover sm:w-32 sm:h-32" /></td>
             <td className="border border-gray-400 px-4 py-2">₹{product.swiggy.price}</td>
             <td className="border border-gray-400 px-4 py-2">{product.swiggy.rating}</td>
             <td className="border border-gray-400 px-4 py-2">{product.swiggy.review}</td>
@@ -78,16 +78,13 @@ const ProductComparisonDetail = () => {
         </tbody>
       </table>
       <div className="mt-4">
-  <Link
-    to="/explore-dining"
-    className="text-blue-700 font-bold inline-block px-4 py-2 bg-blue-200 rounded-md transition-transform transform hover:scale-105 hover:bg-blue-500 hover:text-white duration-300 ease-in-out"
-  >
-    View All Products
-  </Link>
-</div>
-
-
-
+        <Link
+          to="/explore-dining"
+          className="text-blue-700 font-bold inline-block px-4 py-2 bg-blue-200 rounded-md transition-transform transform hover:scale-105 hover:bg-blue-500 hover:text-white duration-300 ease-in-out"
+        >
+          View All Products
+        </Link>
+      </div>
     </div>
   );
 };
