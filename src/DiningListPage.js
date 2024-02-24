@@ -10,6 +10,8 @@ const DiningListPage = () => {
     { id: 3, name: 'Dosa', price: 2, image: '/Images/burger.jpg' },
     { id: 4, name: 'Idli', price: 6, image: '/Images/burger.jpg' },
     { id: 5, name: 'Vadapav', price: 4, image: '/Images/burger.jpg' },
+    { id: 6, name: 'Samosa', price: 5, image: '/Images/burger.jpg' },
+    { id: 7, name: 'dvd', price: 5, image: '/Images/burger.jpg' },
     // Add more dining products
   ];
 
@@ -45,7 +47,7 @@ const DiningListPage = () => {
   const renderSuggestion = suggestion => (
     <div>
       <Link to={`/dining/compare/${suggestion.id}`}>
-        {suggestion.name} - ${suggestion.price}
+        {suggestion.name} - ₹{suggestion.price}
       </Link>
     </div>
   );
@@ -111,7 +113,7 @@ const DiningListPage = () => {
                 className="w-full h-48 object-cover mb-4 rounded-md hover:opacity-75 transition duration-300 ease-in-out"
               />
               <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
-              <p className="text-gray-700">${product.price}</p>
+              <p className="text-gray-700">₹{product.price}</p>
             </Link>
           </div>
         ))}
