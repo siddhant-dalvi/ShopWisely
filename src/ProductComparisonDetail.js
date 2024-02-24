@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 // Dummy product data (replace this with your actual data retrieval logic)
 const getProductById = (id) => {
@@ -23,6 +23,12 @@ const getProductById = (id) => {
       zomato: { price: 3, rating: 4.2, review: 'Okay', image: '/Images/dosa.jpg' },
       swiggy: { price: 3.5, rating: 4.3, review: 'Niceeee', image: '/Images/dosa.jpg' }
     },
+    4: {
+      id: 4,
+      name: 'Samosa',
+      zomato: { price: 15, rating: 4.2, review: 'Okay', image: '/Images/samosa.jpg' },
+      swiggy: { price: 10, rating: 4.3, review: 'Niceeee', image: '/Images/samosa.jpg' }
+    },
     // Add more products
   };
 
@@ -41,22 +47,47 @@ const ProductComparisonDetail = () => {
     <div className="container mx-auto p-8">
       <h2 className="text-2xl font-semibold mb-4">Product Comparison</h2>
       <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <h4>Zomato</h4>
-          <img src={product.zomato.image} alt={product.name} className="w-full h-48 object-cover mb-4 rounded-md" />
-          <p>Price: ${product.zomato.price}</p>
-          <p>Rating: {product.zomato.rating}</p>
-          <p>Review: {product.zomato.review}</p>
-        </div>
-        <div>
-          <h4>Swiggy</h4>
-          <img src={product.swiggy.image} alt={product.name} className="w-full h-48 object-cover mb-4 rounded-md" />
-          <p>Price: ${product.swiggy.price}</p>
-          <p>Rating: {product.swiggy.rating}</p>
-          <p>Review: {product.swiggy.review}</p>
-        </div>
-      </div>
+      <table className="table-auto w-full border-collapse border border-gray-400">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="border border-gray-400 px-4 py-2">Platform</th>
+            <th className="border border-gray-400 px-4 py-2">Image</th>
+            <th className="border border-gray-400 px-4 py-2">Price</th>
+            <th className="border border-gray-400 px-4 py-2">Rating</th>
+            <th className="border border-gray-400 px-4 py-2">Review</th>
+            <th className="border border-gray-400 px-4 py-2">Buy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="border border-gray-400 px-4 py-2">Zomato</td>
+            <td className="border border-gray-400 px-4 py-2"><img src={product.zomato.image} alt={product.name} className="w-24 h-24 object-cover" /></td>
+            <td className="border border-gray-400 px-4 py-2">₹{product.zomato.price}</td>
+            <td className="border border-gray-400 px-4 py-2">{product.zomato.rating}</td>
+            <td className="border border-gray-400 px-4 py-2">{product.zomato.review}</td>
+            <td className="border border-gray-400 px-4 py-2"><button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Buy</button></td>
+          </tr>
+          <tr>
+            <td className="border border-gray-400 px-4 py-2">Swiggy</td>
+            <td className="border border-gray-400 px-4 py-2"><img src={product.swiggy.image} alt={product.name} className="w-24 h-24 object-cover" /></td>
+            <td className="border border-gray-400 px-4 py-2">₹{product.swiggy.price}</td>
+            <td className="border border-gray-400 px-4 py-2">{product.swiggy.rating}</td>
+            <td className="border border-gray-400 px-4 py-2">{product.swiggy.review}</td>
+            <td className="border border-gray-400 px-4 py-2"><button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Buy</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div className="mt-4">
+  <Link
+    to="/explore-dining"
+    className="text-blue-700 font-bold inline-block px-4 py-2 bg-blue-200 rounded-md transition-transform transform hover:scale-105 hover:bg-blue-500 hover:text-white duration-300 ease-in-out"
+  >
+    View All Products
+  </Link>
+</div>
+
+
+
     </div>
   );
 };
